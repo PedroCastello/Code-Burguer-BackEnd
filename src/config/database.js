@@ -5,7 +5,7 @@ module.exports = {
   password: 'postgres',
   database: 'code burguer',
   define: {
-    timespamps: true,
+    timestamps: true,
     underscored: true,
     underscoredAll: true
   }
