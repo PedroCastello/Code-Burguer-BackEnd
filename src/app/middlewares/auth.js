@@ -18,8 +18,9 @@ export default (request, response, next) => {
         throw new Error()
       }
 
-      request.userId = decoded.id
-      request.userName = decoded.name
+      request.UserId = decoded.id
+      request.UserName = decoded.name
+
       return next()
     })
   } catch (err) {
