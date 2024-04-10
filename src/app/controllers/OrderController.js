@@ -65,6 +65,23 @@ class OrderController {
 
     return response.status(201).json(orderResponse)
   }
+  async index(request, response) {
+    const orders = await Order.find()
+
+    return response.json(orders)
+  }
+
+  async update(request, response) {
+    const { id } = request.params
+    const { status } = request.body
+
+    try {
+      await Order.updateOne({ _id: id }, { status })
+    } catch (error) {
+      return response.status(400).json({ error: error.message })
+    }
+    return response.json({ message: 'status was updated' })
+  }
 }
 
 export default new OrderController()
