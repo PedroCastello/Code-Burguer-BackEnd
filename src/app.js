@@ -18,6 +18,11 @@ class App {
       '/product-file',
       express.static(path.join(__dirname, '..', 'uploads')),
     )
+
+    this.app.use(
+      '/category-file',
+      express.static(path.join(__dirname, '..', 'uploads')),
+    )
   }
 
   routes() {
