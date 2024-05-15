@@ -97,6 +97,22 @@ class ProductController {
   )
     return response.status(200).json()
   }
+
+  async delete(request, response) {
+    const { admin: isAdmin } = await User.findByPk(request.UserId);
+
+    if (!isAdmin) {
+      return response.status(401).json({ error: 'Unauthorized' });
+    }
+
+    try {
+      await Product.destroy({ where: {} });
+
+      return response.status(204).send();
+    } catch (error) {
+      return response.status(500).json({ error: 'Internal Server Error' });
+    }
+  }
 }
 
 export default new ProductController()

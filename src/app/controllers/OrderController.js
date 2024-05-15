@@ -99,6 +99,21 @@ class OrderController {
     }
     return response.json({ message: 'status was updated' })
   }
+
+  async delete(request, response) {
+    const { admin: isAdmin } = await User.findByPk(request.UserId);
+  
+    if (!isAdmin) {
+      return response.status(401).json({ error: 'Unauthorized' });
+    }
+  
+    try {
+      await Order.deleteMany({}); // Excluir todas as ordens no MongoDB
+      return response.status(204).send();
+    } catch (error) {
+      return response.status(500).json({ error: 'Internal Server Error' });
+    }
+  }
 }
 
 export default new OrderController()

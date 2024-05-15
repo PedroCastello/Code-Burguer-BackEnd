@@ -82,5 +82,26 @@ class CategoryController {
       return response.status(200).json()
     }
   }
+
+  async update(request, response) {
+    // Código existente para atualizar uma categoria
+  }
+
+  async delete(request, response) {
+    const { admin: isAdmin } = await User.findByPk(request.UserId);
+
+    if (!isAdmin) {
+      return response.status(401).json({ error: 'Unauthorized' });
+    }
+
+    try {
+      await Category.destroy({ where: {} });
+
+      return response.status(204).send();
+    } catch (error) {
+      return response.status(500).json({ error: 'Internal Server Error' });
+    }
+  }
 }
+
 export default new CategoryController()
